@@ -1,0 +1,26 @@
+.addProperty {
+    padding: 10px;
+    margin: space 0% auto;
+
+}
+.input, select {
+    width: 20%;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.font, {
+    font-size: 15px;
+    width: 19.5%;
+    margin: 8px 0;
+}
+ .addButton {
+    width: 20%;
+    margin: 8px 0;
+ }
+
+ #dropDown, #input {
+     /* border: 1px solid black; */
+
+ }
