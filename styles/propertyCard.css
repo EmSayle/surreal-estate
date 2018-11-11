@@ -1,0 +1,25 @@
+.card {
+  width: 100%;
+  border: 1px solid black;
+  margin: 10px;
+
+}
+.addButton2 {
+  width: 100%;
+  background-color: #379683;
+  color: #EDF5E1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.addButton2:hover {
+  box-shadow: inset 0px 0px 0px 3px darkgreen;
+}
+button:focus {outline:0;}
+
+.image {
+  padding: 20px 0px;
+  border-bottom: 1px solid black;
+}

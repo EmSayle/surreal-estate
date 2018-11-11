@@ -2,5 +2,7 @@ body {
     font-family: 'Oxygen', sans-serif;
     margin: 0%;
     padding: 0%;
-    background-color: rgb(204, 236, 204);;
+    /* background-color: #5CDB95; */
+    background-color: #EDF5E1; 
+    color: #05386B;
 }

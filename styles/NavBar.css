@@ -1,20 +1,23 @@
 .NavBar {
-    background-color: white;
-    border-bottom: 10px solid white;
+    background-color: #379683;
+    border-bottom: 10px solid #379683;
     padding-top: 5px;
 }
 .textlogo {
     display: inline;
     padding: 10px;
+    /* color: #5CDB95; */
+    color: #05386B;
 }
 .nav {
     margin: 0px;
     padding: 0px;
     display: inline;
+    color: #05386B;
 }
 .item {
     margin: 0px;
-    padding: 30px;
+    padding: 10px;
     display: inline;
     font-size: 20px;
 }
@@ -25,14 +28,12 @@
     cursor: pointer;
     border-radius: 8px;
     padding: 6px;
-
+    background-color: #379683;
+    color: #05386B;
 }
 .button:hover {
-    /* background-color: lightgray; */
-    /* font-weight: bold; */
-    /* box-shadow: 1px 4px 5px 0 rgba(0,0,0,0.24);    */
-    /* box-shadow: 5px 5px 12px -2px rgba(130,130,130,1); */
-    color: lightgray;
+    background-color: #EDF5E1;
+    color: #379683
   }
 .button:focus {outline:0;}
 

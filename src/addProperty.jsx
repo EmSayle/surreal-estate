@@ -1,6 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import Alert from '../src/alert';
 
+// const successMsg = 'Property added';
+const errorMsg = () => {
+  alert('Server error. Please try again later!');
+};
+
+const successMsg = function () {
+  alert('Property successfully added!!');
+};
 
 class AddProperty extends React.Component {
   constructor(props) {
@@ -8,19 +17,15 @@ class AddProperty extends React.Component {
     this.state = {
       fields: {
         title: '',
-        type: '',
-        bedrooms: 0,
-        bathrooms: 0,
+        type: 'Property Type',
+        bedrooms: 'bedrooms',
+        bathrooms: 'bathrooms',
+        city: 'City',
         price: 0,
-        city: '',
-        email: '',
-        // title: '',
-        // type: 'Flat',
-        // city: 'Manchester',
-        // bedrooms: 'studio',
-        // bathrooms: '1',
-        // price: '0',
       },
+      alertMessage: '',
+      isSuccess: false,
+      isError: false,
     };
     this.handleFieldChange = this.handleFieldChange.bind(this);
   }
@@ -28,13 +33,25 @@ class AddProperty extends React.Component {
 
 handleAddProperty = (event) => {
   event.preventDefault();
-  console.log(this.state.fields);
+  // console.log(this.state.fields);
+  this.setState({
+    alertMessage: '',
+    isSuccess: false,
+    isError: false,
+  });
+
   axios.post('http://localhost:3000/api/v1/PropertyListing', this.state.fields)
-    .then(function (response) {
-      console.log(response);
+    .then(() => {
+      this.setState({
+        isSuccess: true,
+        alertMessage: successMsg(),
+      });
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(() => {
+      this.setState({
+        alertMessage: errorMsg(),
+        isError: true,
+      });
     });
 };
 
@@ -46,13 +63,24 @@ handleFieldChange = (event) => {
 
 render() {
   return (
-    <div className="addProperty">
-      <div className="addProperties">Add Properties</div>
-      <form onSubmit={this.handleAddProperty}>
-        <input className="font" id="input" name="title" value={this.state.fields.title} onChange={this.handleFieldChange} type="text" />
+    <div>
+      <h1 className="addProperties">Add Properties</h1>
+      <main>
+        <form onSubmit={this.handleAddProperty}>
+          <label id="formLines">Propery Title</label>
+          <input
+            className="propType"
+            id="input"
+            name="title"
+            value={this.state.fields.title}
+            onChange={this.handleFieldChange}
+            type="text"
+            placeholder="add property title"
+          />
 
-        <div id="dropDown">
+          <label id="formLines">Property Type</label>
           <select name="type" value={this.state.fields.type} onChange={this.handleFieldChange}>
+            <option value="select type">Select property type</option>
             <option value="Flat">Flat</option>
             <option value="Detatched">Detatched</option>
             <option value="Semi-Detached">Semi-Detached</option>
@@ -60,21 +88,10 @@ render() {
             <option value="Cottage">Cottage</option>
             <option value="Bungalow">Bungalow</option>
           </select>
-        </div>
 
-        <div id="dropDown">
-          {/* <label>City</label> */}
-          <select name="city" value={this.state.fields.city} onChange={this.handleFieldChange}>
-            <option value="Manchester">Manchester</option>
-            <option value="Leeds">Leeds</option>
-            <option value="Sheffield">Sheffield</option>
-            <option value="Liverpool">Liverpool</option>
-          </select>
-        </div>
-
-        <div id="dropDown">
-          {/* <label>Bedrooms</label> */}
+          <label>Bedrooms</label>
           <select name="bedrooms" value={this.state.fields.bedrooms} onChange={this.handleFieldChange}>
+            <option value="bedrooms">Select number of bedrooms</option>
             <option value="0">Studio</option>
             <option value="1">1 Bedroom</option>
             <option value="2">2 Bedrooms</option>
@@ -82,22 +99,40 @@ render() {
             <option value="4">4 Bedrooms</option>
             <option value="5">5 Bedrooms</option>
           </select>
-        </div>
 
-        <div id="dropDown">
-          {/* <label>Bathrooms</label> */}
+          <label>Bathrooms</label>
           <select name="bathrooms" value={this.state.fields.bathrooms} onChange={this.handleFieldChange}>
+            <option value="bathrooms">Select number of bathrooms</option>
             <option value="1">1 Bathrooms</option>
             <option value="2">2 Bathrooms</option>
             <option value="3">3 Bathrooms</option>
+            <option value="4">4 Bathrooms</option>
           </select>
-        </div>
-        <div>
-          {/* <label>Price</label> */}
+
+          <label>City</label>
+          <select name="city" value={this.state.fields.city} onChange={this.handleFieldChange} id="customSelect">
+            <option value="city">Select number of bedrooms</option>
+            <option value="Manchester">Manchester</option>
+            <option value="Leeds">Leeds</option>
+            <option value="Sheffield">Sheffield</option>
+            <option value="Liverpool">Liverpool</option>
+          </select>
+
+          <label>Price</label>
           <input className="font" id="input" name="price" value={this.state.fields.price} onChange={this.handleFieldChange} type="number" />
-        </div>
-        <button className="addButton" add="add">Add</button>
-      </form>
+
+          <button className="addButton" add="add">Add</button>
+
+          <div className="alert success">
+            {this.state.isSuccess && <Alert message={this.state.alertMessage} success />}
+          </div>
+
+          <div className="alert">
+            {this.state.isError && <Alert message={this.state.alertMessage} />}
+          </div>
+
+        </form>
+      </main>
     </div>
   );
 }
@@ -105,13 +140,3 @@ render() {
 
 
 export default AddProperty;
-
-// import React from 'react';
-
-// const AddProperty = () => (
-//   <React.Fragment>
-//     Add Property
-//   </React.Fragment>
-// );
-
-// export default AddProperty;
